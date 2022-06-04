@@ -1,5 +1,3 @@
-import { ReturnModelType, DocumentType } from '@typegoose/typegoose';
-import { AnyParamConstructor, BeAnObject } from '@typegoose/typegoose/lib/types';
 import {
     registerDecorator,
     ValidationOptions,
@@ -7,9 +5,9 @@ import {
     ValidatorConstraintInterface,
     ValidationArguments,
   } from 'class-validator';
+import { Model } from 'mongoose';
+import { UniqueFindCondition } from '../types';
   
-  type UniqueFindCondition<Model> = { [P in keyof DocumentType<Model, BeAnObject>]?: any; };
-  type Model<Entity> = ReturnModelType<AnyParamConstructor<Entity>, BeAnObject>;
 
   type UniqueValidationArguments<Entity> = {
     property: keyof Entity;
