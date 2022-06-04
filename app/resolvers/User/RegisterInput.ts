@@ -1,8 +1,9 @@
 import { InputType, Field } from 'type-graphql';
 import { IsEmail, Length } from 'class-validator';
-import { User, UserModel } from '../../entities/User';
-import { isStrongPassword } from '../../custom-validators/isStrongPassword';
-import { Unique } from '../../custom-validators/Unique';
+
+import { User, UserModel } from '@entities/User';
+import { Unique } from '@custom-validators/Unique';
+import { isStrongPassword } from '@custom-validators/isStrongPassword';
 
 @InputType()
 export class RegisterInput implements Partial<User> {

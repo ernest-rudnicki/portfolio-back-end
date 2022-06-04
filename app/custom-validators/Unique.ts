@@ -5,14 +5,17 @@ import {
     ValidatorConstraintInterface,
     ValidationArguments,
   } from 'class-validator';
-import { Model } from 'mongoose';
-import { UniqueFindCondition } from '../types';
-  
+import { Model } from 'mongoose';  
+import { DocumentType } from '@typegoose/typegoose';
+import { BeAnObject } from '@typegoose/typegoose/lib/types';
+
 
   type UniqueValidationArguments<Entity> = {
     property: keyof Entity;
     constraints: [Model<Entity>];
   } & ValidationArguments
+
+  export type UniqueFindCondition<Model> = { [P in keyof DocumentType<Model, BeAnObject>]?: any; };
   
   @ValidatorConstraint({name: 'unique', async: true })
   export class UniqueValidator implements ValidatorConstraintInterface {

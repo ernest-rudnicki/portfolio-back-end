@@ -23,12 +23,14 @@
         "experimentalDecorators": true,
         "outDir": "dist",
         "rootDir": "app",
-        "baseUrl": ".",
+        "baseUrl": "./app",
         "paths": {
-            "*": [
-                "node_modules/*",
-                "app/types/*"
-            ]
+            "@constants/*": ["constants/*"],
+            "@custom-validators/*": ["custom-validators/*"],
+            "@entities/*": ["entities/*"],
+            "@resolvers/*": ["resolvers/*"],
+            "@utils/*": ["utils/*"],
+            "@types/*": ["types/*"]
         }
     },
     "include": [

@@ -3,11 +3,13 @@ import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-co
 import Express from 'express';
 import { buildSchema } from 'type-graphql';
 import { connect } from 'mongoose';
+
+import 'module-alias/register';
 import 'reflect-metadata';
 import 'dotenv/config'
 
-import { buildConnectionString } from './utils/utils';
-import { RegisterResolver } from './resolvers/User/RegisterResolver';
+import { RegisterResolver } from '@resolvers/User/RegisterResolver';
+import { buildConnectionString } from '@utils/utils';
 
 const main = async () => {
   const schema = await buildSchema({
