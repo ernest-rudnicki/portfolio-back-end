@@ -1,10 +1,10 @@
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import * as bcrypt from "bcryptjs";
 import { User, UserModel } from "../../entities/User";
-import { UserInput } from "./UserInput";
+import { RegisterInput } from "./RegisterInput";
 
 @Resolver()
-export class UserResolver {
+export class RegisterResolver {
 
     @Query(() => String)
     async hello() {
@@ -17,7 +17,7 @@ export class UserResolver {
         firstName,
         lastName,
         password,
-    }: UserInput): Promise<User> {
+    }: RegisterInput): Promise<User> {
         if (!process.env.PASSWORD_SALT) {
             throw new Error("Password salt was not provided");
         }

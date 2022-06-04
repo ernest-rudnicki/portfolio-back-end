@@ -7,12 +7,12 @@ import 'reflect-metadata';
 import 'dotenv/config'
 
 import { buildConnectionString } from './utils/utils';
-import { UserResolver } from './resolvers/User/UserResolver';
+import { RegisterResolver } from './resolvers/User/RegisterResolver';
 
 const main = async () => {
   const schema = await buildSchema({
     resolvers: [
-      UserResolver
+      RegisterResolver
     ],
     emitSchemaFile: true,
   });

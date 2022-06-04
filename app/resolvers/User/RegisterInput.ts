@@ -5,7 +5,7 @@ import { isStrongPassword } from '../../custom-validators/isStrongPassword';
 import { Unique } from '../../custom-validators/Unique';
 
 @InputType()
-export class UserInput implements Partial<User> {
+export class RegisterInput implements Partial<User> {
   @Field()
   @Length(1, 255)
   firstName: string;
