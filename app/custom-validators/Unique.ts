@@ -1,5 +1,4 @@
 import {
-  registerDecorator,
   ValidationOptions,
   ValidatorConstraint,
   ValidatorConstraintInterface,
@@ -9,7 +8,7 @@ import { Model } from "mongoose";
 import { DocumentType } from "@typegoose/typegoose";
 import { BeAnObject } from "@typegoose/typegoose/lib/types";
 
-import { AnyObject } from "@utils/types";
+import { createValidationDecorator } from "./helpers";
 
 type UniqueValidationArguments<Entity> = {
   property: keyof Entity;
@@ -45,13 +44,10 @@ export function Unique<Entity>(
   ModelClass: Model<Entity>,
   validationOptions?: ValidationOptions
 ) {
-  return function (object: AnyObject, propertyName: string) {
-    registerDecorator({
-      target: object.constructor,
-      propertyName: propertyName,
+  return (object: unknown, propertyName: string) =>
+    createValidationDecorator(object, propertyName, {
       options: validationOptions,
       constraints: [ModelClass],
       validator: UniqueValidator,
     });
-  };
 }

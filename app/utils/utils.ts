@@ -1,3 +1,5 @@
+import { AnyObject } from "./types";
+
 export function buildConnectionString(
   username?: string,
   password?: string,
@@ -20,4 +22,8 @@ export function buildConnectionString(
   connectionString = connectionString.replace("<password>", password);
 
   return connectionString;
+}
+
+export function isAnyObject(object: unknown): object is AnyObject {
+  return !!object && typeof object === "object";
 }

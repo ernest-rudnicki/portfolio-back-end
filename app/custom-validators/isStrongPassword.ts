@@ -1,12 +1,10 @@
 import {
-  registerDecorator,
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from "class-validator";
+
 import { PASSWORD_REGEX } from "@constants/constants";
-
-import { AnyObject } from "@utils/types";
-
+import { createValidationDecorator } from "./helpers";
 @ValidatorConstraint({ name: "isStrongPassword" })
 export class IsStrongPasswordValidator implements ValidatorConstraintInterface {
   validate(value: unknown) {
@@ -19,11 +17,8 @@ export class IsStrongPasswordValidator implements ValidatorConstraintInterface {
 }
 
 export function isStrongPassword() {
-  return function (object: AnyObject, propertyName: string) {
-    registerDecorator({
-      target: object.constructor,
-      propertyName: propertyName,
+  return (object: unknown, propertyName: string) =>
+    createValidationDecorator(object, propertyName, {
       validator: IsStrongPasswordValidator,
     });
-  };
 }
