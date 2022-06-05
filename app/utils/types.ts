@@ -8,3 +8,9 @@ export interface ApiContext {
   req: Request;
   res: Response;
 }
+
+export const enum Role {
+  NONE,
+  ADMINISTRATOR,
+  USER,
+}

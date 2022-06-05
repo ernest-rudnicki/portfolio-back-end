@@ -22,6 +22,7 @@ input RegisterInput {
   firstName: String!
   lastName: String!
   password: String!
+  role: Float!
 }
 
 """The User model"""
@@ -30,4 +31,5 @@ type User {
   email: String!
   id: ID!
   name: String!
+  role: Float!
 }

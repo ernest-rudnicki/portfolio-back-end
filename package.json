@@ -52,6 +52,7 @@
     "@custom-validators": "app/custom-validators",
     "@entities": "app/entities",
     "@resolvers": "app/resolvers",
-    "@utils": "app/utils"
+    "@utils": "app/utils",
+    "@auth": "app/auth"
   }
 }

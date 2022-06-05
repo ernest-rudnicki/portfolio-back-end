@@ -13,11 +13,13 @@ import { RegisterResolver } from "@resolvers/User/RegisterResolver";
 import { LoginResolver } from "@resolvers/User/LoginResolver";
 import { buildConnectionString } from "@utils/utils";
 import { ApiContext } from "@utils/types";
+import { authChecker } from "@auth/auth";
 
 const main = async () => {
   const schema = await buildSchema({
     resolvers: [RegisterResolver, LoginResolver],
     emitSchemaFile: true,
+    authChecker,
   });
 
   const mongoose = await connect(

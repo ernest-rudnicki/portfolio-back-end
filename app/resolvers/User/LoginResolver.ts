@@ -30,6 +30,7 @@ export class LoginResolver {
     if (!valid) {
       throw Error("Wrong email or password.");
     }
+
     const { token } = await TokenModel.findOneAndUpdate(
       {
         user: user.id,

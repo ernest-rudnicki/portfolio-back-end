@@ -4,6 +4,7 @@ import { IsEmail, Length } from "class-validator";
 import { User, UserModel } from "@entities/User";
 import { Unique } from "@custom-validators/Unique";
 import { isStrongPassword } from "@custom-validators/isStrongPassword";
+import { Role } from "@utils/types";
 
 @InputType()
 export class RegisterInput implements Partial<User> {
@@ -24,4 +25,7 @@ export class RegisterInput implements Partial<User> {
   @Length(1, 255)
   @isStrongPassword()
   password: string;
+
+  @Field()
+  role: Role;
 }

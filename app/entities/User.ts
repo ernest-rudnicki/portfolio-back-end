@@ -1,5 +1,6 @@
 import { ObjectType, Field, ID, Root } from "type-graphql";
 import { prop as Property, getModelForClass } from "@typegoose/typegoose";
+import { Role } from "@utils/types";
 
 @ObjectType({ description: "The User model" })
 export class User {
@@ -27,6 +28,10 @@ export class User {
 
   @Property({ required: true })
   password: string;
+
+  @Field()
+  @Property({ default: Role.USER })
+  role: Role;
 }
 
 export const UserModel = getModelForClass(User);
