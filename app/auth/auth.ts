@@ -1,6 +1,7 @@
 import { TokenModel } from "@entities/Token";
 import { isDocument } from "@typegoose/typegoose";
 import { ApiContext, Role } from "@utils/types";
+import { isLessThan24HourAgo } from "@utils/utils";
 
 export async function authChecker(
   { context }: { context: ApiContext },
@@ -17,6 +18,11 @@ export async function authChecker(
   });
 
   if (!token) {
+    return false;
+  }
+
+  const { creationDate } = token;
+  if (!isLessThan24HourAgo(creationDate)) {
     return false;
   }
 

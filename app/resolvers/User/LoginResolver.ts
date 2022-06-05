@@ -4,9 +4,9 @@ import * as bcrypt from "bcryptjs";
 import { TokenModel } from "@entities/Token";
 import { uidgen } from "@utils/uid";
 import { ApiContext } from "@utils/types";
-import { AUTH_COOKIE_NAME } from "@constants/constants";
+import { AUTH_COOKIE_NAME, USER_ID_COOKIE_NAME } from "@constants/constants";
 import { User, UserModel } from "@entities/User";
-import { getCookieExpirationDate } from "@utils/utils";
+import { getCookieConfig } from "@utils/utils";
 
 @Resolver()
 export class LoginResolver {
@@ -38,15 +38,13 @@ export class LoginResolver {
       {
         token: uidgen.generateSync(),
         user: user.id,
+        creationDate: new Date(),
       },
       { upsert: true, new: true, setDefaultsOnInsert: true }
     );
 
-    context.res.cookie(AUTH_COOKIE_NAME, token, {
-      expires: getCookieExpirationDate(),
-      httpOnly: true,
-      signed: true,
-    });
+    context.res.cookie(AUTH_COOKIE_NAME, token, getCookieConfig());
+    context.res.cookie(USER_ID_COOKIE_NAME, user.id, getCookieConfig());
 
     return user;
   }

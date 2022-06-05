@@ -5,6 +5,9 @@ export class Token {
   @Property()
   token: string;
 
+  @Property({ default: new Date() })
+  creationDate: Date;
+
   @Property({ ref: () => User })
   user: Ref<User>;
 }

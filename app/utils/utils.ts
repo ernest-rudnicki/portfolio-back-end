@@ -34,6 +34,22 @@ export function getCookieExpirationDate(): Date {
   }
 
   return new Date(
-    Date.now() + parseInt(process.env.COOKIE_EXPIRATION_PERIOD) * 3600000
+    Date.now() + parseInt(process.env.COOKIE_EXPIRATION_PERIOD) * 60 * 60 * 1000
   );
+}
+
+export function isLessThan24HourAgo(date: Date) {
+  const twentyFourHrInMs = 24 * 60 * 60 * 1000;
+
+  const twentyFourHoursAgo = Date.now() - twentyFourHrInMs;
+
+  return date.getTime() > twentyFourHoursAgo;
+}
+
+export function getCookieConfig() {
+  return {
+    expires: getCookieExpirationDate(),
+    httpOnly: true,
+    signed: true,
+  };
 }
