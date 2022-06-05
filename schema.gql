@@ -30,6 +30,5 @@ type User {
   creationDate: DateTime!
   email: String!
   id: ID!
-  name: String!
   role: Float!
 }

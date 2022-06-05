@@ -1,4 +1,4 @@
-import { ObjectType, Field, ID, Root } from "type-graphql";
+import { ObjectType, Field, ID } from "type-graphql";
 import { prop as Property, getModelForClass } from "@typegoose/typegoose";
 import { Role } from "@utils/types";
 
@@ -16,11 +16,6 @@ export class User {
 
   @Property({ required: true })
   lastName: string;
-
-  @Field()
-  name(@Root() parent: User): string {
-    return `${parent.firstName} ${parent.lastName}`;
-  }
 
   @Field()
   @Property({ default: new Date() })
