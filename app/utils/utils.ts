@@ -27,3 +27,13 @@ export function buildConnectionString(
 export function isAnyObject(object: unknown): object is AnyObject {
   return !!object && typeof object === "object";
 }
+
+export function getCookieExpirationDate(): Date {
+  if (!process.env.COOKIE_EXPIRATION_PERIOD) {
+    throw Error("Cookie expiration period was not provided");
+  }
+
+  return new Date(
+    Date.now() + parseInt(process.env.COOKIE_EXPIRATION_PERIOD) * 3600000
+  );
+}

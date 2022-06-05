@@ -1,7 +1,7 @@
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import * as bcrypt from "bcryptjs";
 
-import { RegisterInput } from "./RegisterInput";
+import { RegisterInput } from "./input/RegisterInput";
 import { User, UserModel } from "@entities/User";
 
 @Resolver()
@@ -20,7 +20,7 @@ export class RegisterResolver {
     }
 
     const hashedPassword = await bcrypt.hash(
-      password,
+      password + process.env.PASSWORD_SECRET,
       bcrypt.genSaltSync(parseInt(process.env.PASSWORD_SALT))
     );
 

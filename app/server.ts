@@ -3,17 +3,20 @@ import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-co
 import Express from "express";
 import { buildSchema } from "type-graphql";
 import { connect } from "mongoose";
+import cookieParser from "cookie-parser";
 
 import "module-alias/register";
 import "reflect-metadata";
 import "dotenv/config";
 
 import { RegisterResolver } from "@resolvers/User/RegisterResolver";
+import { LoginResolver } from "@resolvers/User/LoginResolver";
 import { buildConnectionString } from "@utils/utils";
+import { ApiContext } from "@utils/types";
 
 const main = async () => {
   const schema = await buildSchema({
-    resolvers: [RegisterResolver],
+    resolvers: [RegisterResolver, LoginResolver],
     emitSchemaFile: true,
   });
 
@@ -29,9 +32,11 @@ const main = async () => {
   const server = new ApolloServer({
     schema,
     plugins: [ApolloServerPluginLandingPageGraphQLPlayground],
+    context: ({ req, res }: ApiContext) => ({ req, res }),
   });
 
   const app = Express();
+  app.use(cookieParser(process.env.COOKIE_PARSER_SECRET));
 
   await server.start();
 
