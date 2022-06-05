@@ -1,9 +1,9 @@
-import { InputType, Field } from 'type-graphql';
-import { IsEmail, Length } from 'class-validator';
+import { InputType, Field } from "type-graphql";
+import { IsEmail, Length } from "class-validator";
 
-import { User, UserModel } from '@entities/User';
-import { Unique } from '@custom-validators/Unique';
-import { isStrongPassword } from '@custom-validators/isStrongPassword';
+import { User, UserModel } from "@entities/User";
+import { Unique } from "@custom-validators/Unique";
+import { isStrongPassword } from "@custom-validators/isStrongPassword";
 
 @InputType()
 export class RegisterInput implements Partial<User> {
@@ -19,7 +19,7 @@ export class RegisterInput implements Partial<User> {
   @IsEmail()
   @Unique(UserModel)
   email: string;
-  
+
   @Field()
   @Length(1, 255)
   @isStrongPassword()

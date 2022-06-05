@@ -1,20 +1,20 @@
-import { ObjectType, Field, ID, Root, } from 'type-graphql';
-import { prop as Property, getModelForClass } from '@typegoose/typegoose';
+import { ObjectType, Field, ID, Root } from "type-graphql";
+import { prop as Property, getModelForClass } from "@typegoose/typegoose";
 
-@ObjectType({ description: 'The User model' })
+@ObjectType({ description: "The User model" })
 export class User {
   @Field(() => ID)
   id: number;
 
   @Field()
   @Property({ required: true, unique: true })
-  email: String;
+  email: string;
 
   @Property({ required: true })
-  firstName: String;
+  firstName: string;
 
   @Property({ required: true })
-  lastName: String
+  lastName: string;
 
   @Field()
   name(@Root() parent: User): string {
@@ -26,8 +26,7 @@ export class User {
   creationDate: Date;
 
   @Property({ required: true })
-  password: String;
-  
+  password: string;
 }
 
 export const UserModel = getModelForClass(User);

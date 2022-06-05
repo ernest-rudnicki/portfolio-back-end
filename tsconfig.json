@@ -30,7 +30,6 @@
             "@entities/*": ["entities/*"],
             "@resolvers/*": ["resolvers/*"],
             "@utils/*": ["utils/*"],
-            "@types/*": ["types/*"]
         }
     },
     "include": [
