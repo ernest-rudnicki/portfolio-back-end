@@ -1,5 +1,7 @@
-import { TokenModel } from "@entities/Token";
 import { isDocument } from "@typegoose/typegoose";
+
+import { AUTH_COOKIE_NAME } from "@constants/constants";
+import { TokenModel } from "@entities/Token";
 import { ApiContext, Role } from "@utils/types";
 import { isLessThan24HourAgo } from "@utils/utils";
 
@@ -8,13 +10,14 @@ export async function authChecker(
   roles?: Role[]
 ): Promise<boolean> {
   const { signedCookies } = context.req;
+  const tokenValue = signedCookies[AUTH_COOKIE_NAME];
 
-  if (!signedCookies.token) {
+  if (!tokenValue) {
     return false;
   }
 
   const token = await TokenModel.findOne({
-    token: signedCookies.token,
+    token: tokenValue,
   });
 
   if (!token) {

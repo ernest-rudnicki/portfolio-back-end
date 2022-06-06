@@ -28,7 +28,8 @@
     "mongoose": "^6.3.4",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.1.1",
-    "uid-generator": "^2.0.0"
+    "uid-generator": "^2.0.0",
+    "winston": "^3.7.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
@@ -53,6 +54,9 @@
     "@entities": "app/entities",
     "@resolvers": "app/resolvers",
     "@utils": "app/utils",
-    "@auth": "app/auth"
+    "@auth": "app/auth",
+    "@logger": "app/logger",
+    "@plugins": "app/plugins",
+    "@config": "app/config"
   }
 }

@@ -31,6 +31,9 @@
             "@resolvers/*": ["resolvers/*"],
             "@utils/*": ["utils/*"],
             "@auth/*": ["auth/*"],
+            "@logger/*": ["logger/*"],
+            "@plugins/*": ["plugins/*"],
+            "@config/*": ["config/*"]
         }
     },
     "include": [
