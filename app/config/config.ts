@@ -1,7 +1,8 @@
-import { EnvironmentType } from "@constants/constants";
+import { EnvironmentType } from "@utils/types";
+import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
+
 import { logger } from "@logger/Logger";
 import { LoggerPlugin } from "@plugins/LoggerPlugin";
-import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 
 export function getApolloConfig(env?: string) {
   switch (env) {

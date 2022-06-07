@@ -1,4 +1,4 @@
-import { EnvironmentType } from "@constants/constants";
+import { EnvironmentType } from "@utils/types";
 import winston, { format } from "winston";
 
 export const logger = winston.createLogger({

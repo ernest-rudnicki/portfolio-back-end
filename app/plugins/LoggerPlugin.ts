@@ -42,12 +42,10 @@ export class LoggerPlugin implements ApolloServerPlugin {
         const size = JSON.stringify(graphqlContext.response).length * 2;
         const userId =
           graphqlContext.context.req.signedCookies[USER_ID_COOKIE_NAME];
-        const { remoteAddress } = graphqlContext.context.req.socket;
 
         const log = `Request ended: operation=${op} duration=${elapsed}ms bytes=${size} userId=${
           userId ?? "unlogged"
-        } remoteAddress=${remoteAddress}
-        `;
+        }`;
 
         if (errors) {
           logger.error(log, `errors=${errors}`);

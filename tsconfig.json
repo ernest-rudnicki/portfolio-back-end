@@ -33,7 +33,8 @@
             "@auth/*": ["auth/*"],
             "@logger/*": ["logger/*"],
             "@plugins/*": ["plugins/*"],
-            "@config/*": ["config/*"]
+            "@config/*": ["config/*"],
+            "@pagination/*": ["pagination/*"]
         }
     },
     "include": [

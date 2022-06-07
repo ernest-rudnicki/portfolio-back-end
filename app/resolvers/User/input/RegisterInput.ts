@@ -12,8 +12,8 @@ export class RegisterInput implements Partial<User> {
   @Length(1, 255)
   firstName: string;
 
-  @Length(1, 255)
   @Field()
+  @Length(1, 255)
   lastName: string;
 
   @Field()
@@ -26,6 +26,7 @@ export class RegisterInput implements Partial<User> {
   @isStrongPassword()
   password: string;
 
-  @Field()
+  // eslint-disable-next-line prettier/prettier
+  @Field(() => Role)
   role: Role;
 }

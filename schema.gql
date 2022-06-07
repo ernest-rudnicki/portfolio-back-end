@@ -13,8 +13,18 @@ type Mutation {
   login(email: String!, password: String!): User!
 }
 
+type PaginatedUserResponse {
+  count: Int!
+  result: [User!]!
+}
+
 type Query {
-  hello: String!
+  queryUsers(pagination: QueryUsersInput!): PaginatedUserResponse!
+}
+
+input QueryUsersInput {
+  limit: Int!
+  skip: Int!
 }
 
 input RegisterInput {
@@ -22,7 +32,14 @@ input RegisterInput {
   firstName: String!
   lastName: String!
   password: String!
-  role: Float!
+  role: Role!
+}
+
+"""Roles in the application"""
+enum Role {
+  ADMINISTRATOR
+  NONE
+  USER
 }
 
 """The User model"""
@@ -30,5 +47,5 @@ type User {
   creationDate: DateTime!
   email: String!
   id: ID!
-  role: Float!
+  role: Role!
 }

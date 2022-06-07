@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { ObjectType, Field, ID } from "type-graphql";
 import { prop as Property, getModelForClass } from "@typegoose/typegoose";
 import { Role } from "@utils/types";
@@ -24,7 +25,7 @@ export class User {
   @Property({ required: true })
   password: string;
 
-  @Field()
+  @Field(() => Role)
   @Property({ default: Role.USER })
   role: Role;
 }
