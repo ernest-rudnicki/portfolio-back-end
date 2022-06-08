@@ -3,11 +3,11 @@ import { isDocument } from "@typegoose/typegoose";
 import { AUTH_COOKIE_NAME } from "@constants/constants";
 import { TokenModel } from "@entities/Token";
 import { ApiContext, Role } from "@utils/types";
-import { isLessThan24HourAgo } from "@utils/utils";
+import { isLessThanHoursAgo } from "@utils/utils";
 
 export async function authChecker(
   { context }: { context: ApiContext },
-  roles?: Role[]
+  roles: Role[] | Role
 ): Promise<boolean> {
   const { signedCookies } = context.req;
   const tokenValue = signedCookies[AUTH_COOKIE_NAME];
@@ -25,7 +25,7 @@ export async function authChecker(
   }
 
   const { creationDate } = token;
-  if (!isLessThan24HourAgo(creationDate)) {
+  if (!isLessThanHoursAgo(creationDate, 24)) {
     return false;
   }
 
@@ -36,9 +36,13 @@ export async function authChecker(
     return false;
   }
 
-  if (!roles) {
+  if (Array.isArray(roles)) {
+    return roles.includes(user.role);
+  }
+
+  if (roles === Role.NONE) {
     return true;
   }
 
-  return roles.includes(user.role);
+  return roles === user.role;
 }

@@ -3,6 +3,11 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+input BaseQueryInput {
+  limit: Int!
+  skip: Int!
+}
+
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
@@ -19,12 +24,7 @@ type PaginatedUserResponse {
 }
 
 type Query {
-  queryUsers(pagination: QueryUsersInput!): PaginatedUserResponse!
-}
-
-input QueryUsersInput {
-  limit: Int!
-  skip: Int!
+  queryUsers(pagination: BaseQueryInput!): PaginatedUserResponse!
 }
 
 input RegisterInput {
@@ -46,6 +46,8 @@ enum Role {
 type User {
   creationDate: DateTime!
   email: String!
+  firstName: String!
   id: ID!
+  lastName: String!
   role: Role!
 }

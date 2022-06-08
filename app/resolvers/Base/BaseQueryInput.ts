@@ -2,7 +2,7 @@ import { Min } from "class-validator";
 import { Field, InputType, Int } from "type-graphql";
 
 @InputType()
-export class QueryUsersInput {
+export class BaseQueryInput {
   @Field(() => Int)
   limit: number;
 

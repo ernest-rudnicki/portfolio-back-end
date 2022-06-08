@@ -38,12 +38,12 @@ export function getCookieExpirationDate(): Date {
   );
 }
 
-export function isLessThan24HourAgo(date: Date) {
-  const twentyFourHrInMs = 24 * 60 * 60 * 1000;
+export function isLessThanHoursAgo(date: Date, hours: number) {
+  const hoursInMs = hours * 60 * 60 * 1000;
 
-  const twentyFourHoursAgo = Date.now() - twentyFourHrInMs;
+  const hoursAgo = Date.now() - hoursInMs;
 
-  return date.getTime() > twentyFourHoursAgo;
+  return date.getTime() > hoursAgo;
 }
 
 export function getCookieConfig() {

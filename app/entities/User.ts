@@ -12,9 +12,11 @@ export class User {
   @Property({ required: true, unique: true })
   email: string;
 
+  @Field()
   @Property({ required: true })
   firstName: string;
-
+  
+  @Field()
   @Property({ required: true })
   lastName: string;
 
