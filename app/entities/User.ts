@@ -6,7 +6,7 @@ import { Role } from "@utils/types";
 @ObjectType({ description: "The User model" })
 export class User {
   @Field(() => ID)
-  id: number;
+  id: string;
 
   @Field()
   @Property({ required: true, unique: true })
@@ -15,7 +15,7 @@ export class User {
   @Field()
   @Property({ required: true })
   firstName: string;
-  
+
   @Field()
   @Property({ required: true })
   lastName: string;

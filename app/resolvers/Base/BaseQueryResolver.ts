@@ -1,5 +1,5 @@
 import { Arg, Authorized, ClassType, Query, Resolver } from "type-graphql";
-import { BaseQueryInput } from "./BaseQueryInput";
+import { BaseQueryInput } from "./base-input/BaseQueryInput";
 import { Model } from "mongoose";
 import { Role } from "@utils/types";
 

@@ -7,25 +7,25 @@ import { isStrongPassword } from "@custom-validators/isStrongPassword";
 import { Role } from "@utils/types";
 
 @InputType()
-export class RegisterInput implements Partial<User> {
-  @Field()
+export class UpdateUserInput implements Partial<User> {
+  @Field({ nullable: true })
   @Length(1, 255)
-  firstName: string;
+  firstName?: string;
 
-  @Field()
+  @Field({ nullable: true })
   @Length(1, 255)
-  lastName: string;
+  lastName?: string;
 
-  @Field()
+  @Field({ nullable: true })
   @IsEmail()
   @Unique(UserModel)
-  email: string;
+  email?: string;
 
-  @Field()
+  @Field({ nullable: true })
   @Length(1, 255)
   @isStrongPassword()
-  password: string;
+  password?: string;
 
-  @Field(() => Role)
-  role: Role;
+  @Field(() => Role, { nullable: true })
+  role?: Role;
 }

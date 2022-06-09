@@ -9,7 +9,7 @@ import { Role } from "@utils/types";
 export class RegisterResolver {
   @Authorized([Role.ADMINISTRATOR])
   @Mutation(() => User)
-  async create(
+  async registerUser(
     @Arg("data") { email, firstName, lastName, password, role }: RegisterInput
   ): Promise<User> {
     if (!process.env.PASSWORD_SALT) {

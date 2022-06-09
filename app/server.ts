@@ -10,7 +10,11 @@ import "dotenv/config";
 
 import { RegisterResolver } from "@resolvers/User/RegisterResolver";
 import { LoginResolver } from "@resolvers/User/LoginResolver";
-import { QueryUsersResolver } from "@resolvers/User/QueryUsersResolver";
+import {
+  DeleteUserResolver,
+  QueryUsersResolver,
+  UpdateUserResolver,
+} from "@resolvers/User/UserResolver";
 import { buildConnectionString } from "@utils/utils";
 import { ApiContext } from "@utils/types";
 import { authChecker } from "@auth/auth";
@@ -19,7 +23,13 @@ import { logger } from "@logger/Logger";
 
 const main = async () => {
   const schema = await buildSchema({
-    resolvers: [RegisterResolver, LoginResolver, QueryUsersResolver],
+    resolvers: [
+      RegisterResolver,
+      LoginResolver,
+      QueryUsersResolver,
+      DeleteUserResolver,
+      UpdateUserResolver,
+    ],
     emitSchemaFile: true,
     authChecker,
   });

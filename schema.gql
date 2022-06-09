@@ -14,8 +14,10 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 scalar DateTime
 
 type Mutation {
-  create(data: RegisterInput!): User!
+  deleteUser(id: ID!): User!
   login(email: String!, password: String!): User!
+  registerUser(data: RegisterInput!): User!
+  updateUser(data: UpdateUserInput!, id: ID!): User!
 }
 
 type PaginatedUserResponse {
@@ -40,6 +42,14 @@ enum Role {
   ADMINISTRATOR
   NONE
   USER
+}
+
+input UpdateUserInput {
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  role: Role
 }
 
 """The User model"""
