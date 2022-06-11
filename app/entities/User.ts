@@ -3,7 +3,7 @@ import { ObjectType, Field, ID } from "type-graphql";
 import { prop as Property, getModelForClass } from "@typegoose/typegoose";
 import { Role } from "@utils/types";
 
-@ObjectType({ description: "The User model" })
+@ObjectType()
 export class User {
   @Field(() => ID)
   id: string;
