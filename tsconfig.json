@@ -34,7 +34,6 @@
             "@logger/*": ["logger/*"],
             "@plugins/*": ["plugins/*"],
             "@config/*": ["config/*"],
-            "@pagination/*": ["pagination/*"]
         }
     },
     "include": [

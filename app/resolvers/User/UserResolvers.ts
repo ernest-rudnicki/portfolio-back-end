@@ -2,9 +2,9 @@ import { Role } from "@utils/types";
 import { Resolver } from "type-graphql";
 
 import { User, UserModel } from "@entities/User";
-import { PaginatedUserResponse } from "./factories/PaginatedUserResponse";
+import { PaginatedUserResponse } from "./pagination/PaginatedUserResponse";
 import { BaseQueryInput } from "@resolvers/base/base-input/BaseQueryInput";
-import { UpdateUserInput } from "./input/UpdateInput";
+import { UpdateUserInput } from "./input/UpdateUserInput";
 
 import { createBaseQueryResolver } from "@resolvers/base/BaseQueryResolver";
 import { createBaseDeleteResolver } from "@resolvers/base/BaseDeleteResolver";

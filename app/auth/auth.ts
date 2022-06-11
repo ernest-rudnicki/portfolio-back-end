@@ -7,8 +7,13 @@ import { isLessThanHoursAgo } from "@utils/utils";
 
 export async function authChecker(
   { context }: { context: ApiContext },
-  roles: Role[] | Role
+  roles: Role[]
 ): Promise<boolean> {
+  // for some reason typegraphql wraps roles with array even though its undefined
+  if (!roles[0]) {
+    return true;
+  }
+
   const { signedCookies } = context.req;
   const tokenValue = signedCookies[AUTH_COOKIE_NAME];
 
@@ -37,10 +42,11 @@ export async function authChecker(
   }
 
   if (Array.isArray(roles)) {
+    console.log(roles, user.role);
     return roles.includes(user.role);
   }
 
-  if (roles === Role.NONE) {
+  if (roles === Role.ANY) {
     return true;
   }
 

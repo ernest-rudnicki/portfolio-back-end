@@ -8,16 +8,30 @@ input BaseQueryInput {
   skip: Int!
 }
 
+input CreateTagInput {
+  bgColor: String!
+  fontColor: String!
+  name: String!
+}
+
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
 scalar DateTime
 
 type Mutation {
+  createTag(data: CreateTagInput!): Tag!
+  deleteTag(id: ID!): Tag!
   deleteUser(id: ID!): User!
   login(email: String!, password: String!): User!
-  registerUser(data: RegisterInput!): User!
+  registerUser(data: RegisterUserInput!): User!
+  updateTag(data: UpdateTagInput!, id: ID!): Tag!
   updateUser(data: UpdateUserInput!, id: ID!): User!
+}
+
+type PaginatedTagResponse {
+  count: Int!
+  result: [Tag!]!
 }
 
 type PaginatedUserResponse {
@@ -26,10 +40,12 @@ type PaginatedUserResponse {
 }
 
 type Query {
+  getTag(id: ID!): Tag!
+  queryTags(pagination: BaseQueryInput!): PaginatedTagResponse!
   queryUsers(pagination: BaseQueryInput!): PaginatedUserResponse!
 }
 
-input RegisterInput {
+input RegisterUserInput {
   email: String!
   firstName: String!
   lastName: String!
@@ -40,8 +56,22 @@ input RegisterInput {
 """Roles in the application"""
 enum Role {
   ADMINISTRATOR
+  ANY
   NONE
   USER
+}
+
+type Tag {
+  bgColor: String!
+  fontColor: String!
+  id: ID!
+  name: String!
+}
+
+input UpdateTagInput {
+  bgColor: String
+  fontColor: String
+  name: String
 }
 
 input UpdateUserInput {
@@ -52,7 +82,6 @@ input UpdateUserInput {
   role: Role
 }
 
-"""The User model"""
 type User {
   creationDate: DateTime!
   email: String!

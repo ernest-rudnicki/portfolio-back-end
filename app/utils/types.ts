@@ -17,6 +17,7 @@ export const enum EnvironmentType {
 
 export enum Role {
   NONE,
+  ANY,
   ADMINISTRATOR,
   USER,
 }

@@ -7,7 +7,7 @@ import { isStrongPassword } from "@custom-validators/isStrongPassword";
 import { Role } from "@utils/types";
 
 @InputType()
-export class RegisterInput implements Partial<User> {
+export class RegisterUserInput implements Partial<User> {
   @Field()
   @Length(1, 255)
   firstName: string;

@@ -8,18 +8,26 @@ import "module-alias/register";
 import "reflect-metadata";
 import "dotenv/config";
 
+import { buildConnectionString } from "@utils/utils";
+import { ApiContext } from "@utils/types";
+import { authChecker } from "@auth/auth";
+import { getApolloConfig } from "@config/config";
+import { logger } from "@logger/Logger";
+
 import { RegisterResolver } from "@resolvers/User/RegisterResolver";
 import { LoginResolver } from "@resolvers/User/LoginResolver";
 import {
   DeleteUserResolver,
   QueryUsersResolver,
   UpdateUserResolver,
-} from "@resolvers/User/UserResolver";
-import { buildConnectionString } from "@utils/utils";
-import { ApiContext } from "@utils/types";
-import { authChecker } from "@auth/auth";
-import { getApolloConfig } from "@config/config";
-import { logger } from "@logger/Logger";
+} from "@resolvers/User/UserResolvers";
+import {
+  CreateTagResolver,
+  DeleteTagResolver,
+  GetTagResolver,
+  QueryTagsResolver,
+  UpdateTagResolver,
+} from "@resolvers/Tag/TagResolvers";
 
 const main = async () => {
   const schema = await buildSchema({
@@ -29,6 +37,11 @@ const main = async () => {
       QueryUsersResolver,
       DeleteUserResolver,
       UpdateUserResolver,
+      CreateTagResolver,
+      UpdateTagResolver,
+      QueryTagsResolver,
+      GetTagResolver,
+      DeleteTagResolver,
     ],
     emitSchemaFile: true,
     authChecker,
