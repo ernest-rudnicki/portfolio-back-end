@@ -8,19 +8,24 @@ import {
 } from "type-graphql";
 import { Model } from "mongoose";
 import { Role } from "@utils/types";
+import { populateQuery } from "./helpers";
 
 export function createBaseDeleteResolver<T extends ClassType, E>(
   suffix: string,
   returnType: T,
   model: Model<E>,
-  roles?: Role[]
+  roles?: Role[],
+  keysToPopulate?: Array<keyof E>
 ) {
   @Resolver({ isAbstract: true })
   abstract class BaseDeleteResolver {
     @Authorized(roles)
     @Mutation(() => returnType, { name: `delete${suffix}` })
     async delete(@Arg("id", () => ID) id: string) {
-      const result = await model.findByIdAndRemove(id);
+      let query = model.findByIdAndRemove(id);
+      query = populateQuery(query, keysToPopulate);
+
+      const result = await query.exec();
 
       return result;
     }

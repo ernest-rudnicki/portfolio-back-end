@@ -8,6 +8,7 @@ import {
 } from "type-graphql";
 import { Model } from "mongoose";
 import { Role } from "@utils/types";
+import { populateQuery } from "./helpers";
 
 export function createBaseUpdateResolver<
   I,
@@ -19,7 +20,8 @@ export function createBaseUpdateResolver<
   returnType: T,
   inputType: X,
   model: Model<E>,
-  roles?: Role[]
+  roles?: Role[],
+  keysToPopulate?: Array<keyof E>
 ) {
   @Resolver({ isAbstract: true })
   abstract class BaseUpdateResolver {
@@ -29,7 +31,7 @@ export function createBaseUpdateResolver<
       @Arg("data", () => inputType) data: Partial<I>,
       @Arg("id", () => ID) id: string
     ) {
-      const result = await model.findOneAndUpdate(
+      let query = model.findOneAndUpdate(
         {
           id,
         },
@@ -40,6 +42,10 @@ export function createBaseUpdateResolver<
           new: true,
         }
       );
+
+      query = populateQuery(query, keysToPopulate);
+
+      const result = await query.exec();
 
       return result;
     }
