@@ -42,7 +42,6 @@ export async function authChecker(
   }
 
   if (Array.isArray(roles)) {
-    console.log(roles, user.role);
     return roles.includes(user.role);
   }
 
