@@ -16,7 +16,8 @@ const BaseQueryTagResolver = createBaseQueryResolver(
   "Tags",
   PaginatedTagResponse,
   BaseQueryInput,
-  TagModel
+  TagModel,
+  Tag
 );
 
 const BaseGetTagResolver = createBaseGetResolver("Tag", Tag, TagModel);

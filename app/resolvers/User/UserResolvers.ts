@@ -15,6 +15,7 @@ const BaseQueryUsersResolver = createBaseQueryResolver(
   PaginatedUserResponse,
   BaseQueryInput,
   UserModel,
+  User,
   [Role.ADMINISTRATOR]
 );
 

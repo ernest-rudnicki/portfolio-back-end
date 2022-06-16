@@ -3,6 +3,11 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+enum BaseOperator {
+  AND
+  OR
+}
+
 input BaseQueryInput {
   limit: Int!
   skip: Int!
@@ -73,8 +78,8 @@ type ProjectTranslations {
 type Query {
   getProject(id: ID!): Project!
   getTag(id: ID!): Tag!
-  queryTags(pagination: BaseQueryInput!): PaginatedTagResponse!
-  queryUsers(pagination: BaseQueryInput!): PaginatedUserResponse!
+  queryTags(filters: TagFilter, pagination: BaseQueryInput!): PaginatedTagResponse!
+  queryUsers(filters: UserFilter, pagination: BaseQueryInput!): PaginatedUserResponse!
 }
 
 input RegisterUserInput {
@@ -100,6 +105,17 @@ type Tag {
   name: String!
 }
 
+input TagCondition {
+  name_like: String
+  operator: BaseOperator
+}
+
+input TagFilter {
+  conditions: [TagCondition!]
+  name_like: String
+  operator: BaseOperator
+}
+
 input UpdateTagInput {
   bgColor: String
   fontColor: String
@@ -121,4 +137,15 @@ type User {
   id: ID!
   lastName: String!
   role: Role!
+}
+
+input UserCondition {
+  email_eq: String
+  operator: BaseOperator
+}
+
+input UserFilter {
+  conditions: [UserCondition!]
+  email_eq: String
+  operator: BaseOperator
 }

@@ -28,6 +28,7 @@
     "mongoose": "^6.3.4",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.1.1",
+    "type-graphql-filter": "^0.4.0",
     "uid-generator": "^2.0.0",
     "winston": "^3.7.2"
   },
