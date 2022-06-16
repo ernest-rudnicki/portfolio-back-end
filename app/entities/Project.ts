@@ -20,7 +20,7 @@ export class Project {
   @Property({ required: true })
   order: number;
 
-  @Field()
+  @Field(() => [String])
   @Property()
   imageUrls: string[];
 

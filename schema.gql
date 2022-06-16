@@ -8,6 +8,19 @@ input BaseQueryInput {
   skip: Int!
 }
 
+input CreateProjectInput {
+  description: CreateProjectTranslationInput!
+  imageUrls: [String!]!
+  name: String!
+  order: Float!
+  tags: [String!]!
+}
+
+input CreateProjectTranslationInput {
+  en: String!
+  pl: String!
+}
+
 input CreateTagInput {
   bgColor: String!
   fontColor: String!
@@ -20,7 +33,9 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 scalar DateTime
 
 type Mutation {
+  createProject(data: CreateProjectInput!): Project!
   createTag(data: CreateTagInput!): Tag!
+  deleteProject(id: ID!): Project!
   deleteTag(id: ID!): Tag!
   deleteUser(id: ID!): User!
   login(email: String!, password: String!): User!
@@ -39,7 +54,24 @@ type PaginatedUserResponse {
   result: [User!]!
 }
 
+type Project {
+  creationDate: DateTime!
+  description: ProjectTranslations!
+  id: ID!
+  imageUrls: [String!]!
+  name: String!
+  order: Int!
+  tags: [Tag!]!
+}
+
+type ProjectTranslations {
+  en: String!
+  id: ID!
+  pl: String!
+}
+
 type Query {
+  getProject(id: ID!): Project!
   getTag(id: ID!): Tag!
   queryTags(pagination: BaseQueryInput!): PaginatedTagResponse!
   queryUsers(pagination: BaseQueryInput!): PaginatedUserResponse!
