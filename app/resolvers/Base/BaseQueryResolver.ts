@@ -3,13 +3,14 @@ import { Arg, Authorized, ClassType, Query, Resolver } from "type-graphql";
 import { generateFilterType } from "type-graphql-filter";
 
 import { BaseQueryInput } from "./base-input/BaseQueryInput";
-import { Filters, Role } from "@utils/types";
+import { Role } from "@utils/types";
 import { generateConditions, populateQuery } from "./helpers";
 import { ReturnModelType } from "@typegoose/typegoose";
 import {
   AnyParamConstructor,
   BeAnObject,
 } from "@typegoose/typegoose/lib/types";
+import { Filters } from "./types";
 
 export function createBaseQueryResolver<
   I extends BaseQueryInput,

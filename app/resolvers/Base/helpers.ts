@@ -1,5 +1,6 @@
-import { AnyObject, Filters } from "@utils/types";
+import { AnyObject } from "@utils/types";
 import { Query } from "mongoose";
+import { Filters } from "./types";
 
 export function populateQuery<ResultType, DocType, E>(
   query: Query<ResultType, DocType, AnyObject, E>,

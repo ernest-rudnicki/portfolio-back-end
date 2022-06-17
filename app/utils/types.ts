@@ -9,10 +9,6 @@ export interface ApiContext {
   res: Response;
 }
 
-export type Filters = {
-  [key: string]: string | number;
-};
-
 export const enum EnvironmentType {
   DEVELOPMENT = "DEVELOPMENT",
   PRODUCTION = "PRODUCTION",
