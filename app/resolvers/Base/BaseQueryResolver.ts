@@ -1,24 +1,26 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { Arg, Authorized, ClassType, Query, Resolver } from "type-graphql";
-import { Model } from "mongoose";
 import { generateFilterType } from "type-graphql-filter";
 
 import { BaseQueryInput } from "./base-input/BaseQueryInput";
 import { Filters, Role } from "@utils/types";
-import { populateQuery } from "./helpers";
-import { generateConditions } from "@utils/utils";
+import { generateConditions, populateQuery } from "./helpers";
+import { ReturnModelType } from "@typegoose/typegoose";
+import {
+  AnyParamConstructor,
+  BeAnObject,
+} from "@typegoose/typegoose/lib/types";
 
 export function createBaseQueryResolver<
   I extends BaseQueryInput,
   T extends ClassType,
   X extends ClassType<I>,
-  M extends Model<any>,
-  E
+  E extends AnyParamConstructor<any>
 >(
   suffix: string,
   returnType: T,
   inputType: X,
-  model: M,
+  model: ReturnModelType<E, BeAnObject>,
   entity: E,
   roles?: Role[],
   keysToPopulate?: Array<keyof E>

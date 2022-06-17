@@ -1,4 +1,4 @@
-import { AnyObject, Filters } from "./types";
+import { AnyObject } from "./types";
 
 export function buildConnectionString(
   username?: string,
@@ -52,29 +52,4 @@ export function getCookieConfig() {
     httpOnly: true,
     signed: true,
   };
-}
-
-export function generateConditions(filters: Filters) {
-  const conditions: { [key: string]: unknown } = {};
-  for (const [filterKey, value] of Object.entries(filters)) {
-    const [field, operator] = filterKey.split("_");
-
-    switch (operator) {
-      case "like":
-        if (typeof value !== "string") {
-          throw Error("Value must be a string for like operator");
-        }
-        conditions[field] = new RegExp(value);
-        break;
-      // not supported
-      case "likeAny":
-        break;
-      default:
-        conditions[field] = {
-          [`$${operator}`]: value,
-        };
-        break;
-    }
-  }
-  return conditions;
 }
