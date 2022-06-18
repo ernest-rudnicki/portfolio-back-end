@@ -21,7 +21,7 @@ export function createBaseUpdateResolver<
   inputType: X,
   model: Model<E>,
   roles?: Role[],
-  keysToPopulate?: Array<keyof E>
+  keysToPopulate?: string[]
 ) {
   @Resolver({ isAbstract: true })
   abstract class BaseUpdateResolver {
@@ -31,10 +31,8 @@ export function createBaseUpdateResolver<
       @Arg("data", () => inputType) data: Partial<I>,
       @Arg("id", () => ID) id: string
     ) {
-      let query = model.findOneAndUpdate(
-        {
-          id,
-        },
+      let query = model.findByIdAndUpdate(
+        id,
         {
           ...data,
         },
@@ -46,6 +44,10 @@ export function createBaseUpdateResolver<
       query = populateQuery(query, keysToPopulate);
 
       const result = await query.exec();
+
+      if (!result) {
+        throw Error(`There is no ${suffix.toLowerCase()} with such id`);
+      }
 
       return result;
     }

@@ -24,7 +24,8 @@ export function createBaseQueryResolver<
   model: ReturnModelType<E, BeAnObject>,
   entity: E,
   roles?: Role[],
-  keysToPopulate?: Array<keyof E>
+  keysToPopulate?: string[],
+  sort?: string
 ) {
   @Resolver({ isAbstract: true })
   abstract class BaseQueryResolver {
@@ -35,10 +36,10 @@ export function createBaseQueryResolver<
       @Arg("filters", generateFilterType(entity as unknown as Function), {
         nullable: true,
       })
-      filters: Filters
+      filters: Filters = {}
     ) {
       const conditions = generateConditions(filters);
-      let query = model.find(conditions).skip(skip).limit(limit);
+      let query = model.find(conditions).skip(skip).limit(limit).sort(sort);
       query = populateQuery(query, keysToPopulate);
 
       const result = await query.exec();

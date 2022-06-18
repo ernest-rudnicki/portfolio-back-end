@@ -31,8 +31,10 @@ import {
 import {
   DeleteProjectResolver,
   GetProjectResolver,
+  QueryProjectsResolver,
 } from "@resolvers/Project/ProjectResolvers";
 import { CreateProjectResolver } from "@resolvers/Project/CreateProjectResolver";
+import { UpdateProjectResolver } from "@resolvers/Project/UpdateProjectResolver";
 
 const main = async () => {
   const schema = await buildSchema({
@@ -49,6 +51,9 @@ const main = async () => {
       DeleteTagResolver,
       GetProjectResolver,
       DeleteProjectResolver,
+      CreateProjectResolver,
+      QueryProjectsResolver,
+      UpdateProjectResolver,
       CreateProjectResolver,
     ],
     emitSchemaFile: true,

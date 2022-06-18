@@ -45,8 +45,14 @@ type Mutation {
   deleteUser(id: ID!): User!
   login(email: String!, password: String!): User!
   registerUser(data: RegisterUserInput!): User!
+  updateProject(data: UpdateProjectInput!, id: ID!): Project!
   updateTag(data: UpdateTagInput!, id: ID!): Tag!
   updateUser(data: UpdateUserInput!, id: ID!): User!
+}
+
+type PaginatedProjectResponse {
+  count: Int!
+  result: [Project!]!
 }
 
 type PaginatedTagResponse {
@@ -69,6 +75,17 @@ type Project {
   tags: [Tag!]!
 }
 
+input ProjectCondition {
+  name_like: String
+  operator: BaseOperator
+}
+
+input ProjectFilter {
+  conditions: [ProjectCondition!]
+  name_like: String
+  operator: BaseOperator
+}
+
 type ProjectTranslations {
   en: String!
   id: ID!
@@ -78,6 +95,7 @@ type ProjectTranslations {
 type Query {
   getProject(id: ID!): Project!
   getTag(id: ID!): Tag!
+  queryProjects(filters: ProjectFilter, pagination: BaseQueryInput!): PaginatedProjectResponse!
   queryTags(filters: TagFilter, pagination: BaseQueryInput!): PaginatedTagResponse!
   queryUsers(filters: UserFilter, pagination: BaseQueryInput!): PaginatedUserResponse!
 }
@@ -114,6 +132,19 @@ input TagFilter {
   conditions: [TagCondition!]
   name_like: String
   operator: BaseOperator
+}
+
+input UpdateProjectInput {
+  description: UpdateProjectTranslationInput
+  imageUrls: [String!]
+  name: String
+  order: Float
+  tags: [String!]
+}
+
+input UpdateProjectTranslationInput {
+  en: String
+  pl: String
 }
 
 input UpdateTagInput {

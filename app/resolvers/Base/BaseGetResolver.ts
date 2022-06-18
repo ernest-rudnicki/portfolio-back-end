@@ -8,7 +8,7 @@ export function createBaseGetResolver<T extends ClassType, E>(
   returnType: T,
   model: Model<E>,
   roles?: Role[],
-  keysToPopulate?: Array<keyof E>
+  keysToPopulate?: string[]
 ) {
   @Resolver({ isAbstract: true })
   abstract class BaseGetResolver {
@@ -19,6 +19,10 @@ export function createBaseGetResolver<T extends ClassType, E>(
       query = populateQuery(query, keysToPopulate);
 
       const result = await query.exec();
+
+      if (!result) {
+        throw Error(`There is no ${suffix.toLowerCase} with such id`);
+      }
 
       return result;
     }

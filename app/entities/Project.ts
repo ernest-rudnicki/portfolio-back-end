@@ -2,6 +2,7 @@ import { Field, ID, Int, ObjectType } from "type-graphql";
 import { prop as Property, getModelForClass, Ref } from "@typegoose/typegoose";
 import { ProjectTranslations } from "./ProjectTranslations";
 import { Tag } from "./Tag";
+import { Filter } from "type-graphql-filter";
 
 @ObjectType()
 export class Project {
@@ -10,6 +11,7 @@ export class Project {
 
   @Field()
   @Property({ required: true })
+  @Filter(["like"])
   name: string;
 
   @Field()

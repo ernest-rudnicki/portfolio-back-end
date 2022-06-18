@@ -15,7 +15,7 @@ export function createBaseDeleteResolver<T extends ClassType, E>(
   returnType: T,
   model: Model<E>,
   roles?: Role[],
-  keysToPopulate?: Array<keyof E>
+  keysToPopulate?: string[]
 ) {
   @Resolver({ isAbstract: true })
   abstract class BaseDeleteResolver {

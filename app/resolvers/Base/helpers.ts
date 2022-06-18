@@ -4,10 +4,10 @@ import { Filters } from "./types";
 
 export function populateQuery<ResultType, DocType, E>(
   query: Query<ResultType, DocType, AnyObject, E>,
-  keysToPopulate?: Array<keyof E>
+  keysToPopulate?: string[]
 ) {
   if (keysToPopulate) {
-    query.populate(keysToPopulate as string[]);
+    query.populate(keysToPopulate);
   }
 
   return query;
