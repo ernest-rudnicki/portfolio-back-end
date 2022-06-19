@@ -1,5 +1,5 @@
 import { Project } from "@entities/Project";
-import { PaginatedResponse } from "@resolvers/pagination/PaginationResponse";
+import { PaginatedResponse } from "@resolvers/base/pagination/PaginationResponse";
 import { ObjectType } from "type-graphql";
 
 @ObjectType()
